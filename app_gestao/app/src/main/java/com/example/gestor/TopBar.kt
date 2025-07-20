@@ -34,7 +34,7 @@ fun TopBar(nomeDaPessoa: String, mainOrangeColor: Color) {
                 Spacer(modifier = Modifier.width(1.dp))
                 Text(
                     text = "Olá, $nomeDaPessoa!",
-                    modifier = Modifier.offset(y = 5.dp),
+                    modifier = Modifier.offset(y = 2.dp),
                     color = Color.White,
                     fontSize = 18.sp
                 )
@@ -47,7 +47,7 @@ fun TopBar(nomeDaPessoa: String, mainOrangeColor: Color) {
                     contentDescription = "Notificações",
                     modifier = Modifier
                         .size(28.dp)
-                        .offset(y = 5.dp),
+                        .offset(y = 2.dp),
                     tint = Color.White
                 )
             }
