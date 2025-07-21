@@ -28,14 +28,14 @@ fun TopBar(nomeDaPessoa: String, mainOrangeColor: Color) {
                         imageVector = Icons.Filled.AccountCircle,
                         contentDescription = "Perfil",
                         modifier = Modifier.size(38.dp),
-                        tint = Color.White
+                        tint = Color(0xFF2E2E2E)
                     )
                 }
                 Spacer(modifier = Modifier.width(1.dp))
                 Text(
                     text = "Olá, $nomeDaPessoa!",
                     modifier = Modifier.offset(y = 2.dp),
-                    color = Color.White,
+                    color = Color(0xFF2E2E2E),
                     fontSize = 18.sp
                 )
             }
@@ -48,7 +48,7 @@ fun TopBar(nomeDaPessoa: String, mainOrangeColor: Color) {
                     modifier = Modifier
                         .size(28.dp)
                         .offset(y = 2.dp),
-                    tint = Color.White
+                    tint = Color(0xFF2E2E2E)
                 )
             }
         },

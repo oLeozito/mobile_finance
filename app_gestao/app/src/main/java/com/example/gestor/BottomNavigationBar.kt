@@ -11,34 +11,33 @@ fun BottomNavigationBar(
     items: List<String>,
     icons: List<ImageVector>,
     selectedItem: Int,
-    mainOrangeColor: Color,
-    selectedOrangeColor: Color,
+    mainColor: Color,
     onItemSelected: (Int) -> Unit
 ) {
-    NavigationBar(containerColor = mainOrangeColor) {
+    NavigationBar(containerColor = mainColor) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = {
                     Icon(
                         imageVector = icons[index],
                         contentDescription = item,
-                        tint = if (selectedItem == index) Color.White else Color.White.copy(alpha = 0.7f)
+                        tint = if (selectedItem == index) Color.White else Color(0xFF2E2E2E)
                     )
                 },
                 label = {
                     Text(
                         text = item,
-                        color = if (selectedItem == index) Color.White else Color.White.copy(alpha = 0.7f)
+                        color = Color(0xFF2E2E2E)  // texto sempre cinza escuro
                     )
                 },
                 selected = selectedItem == index,
                 onClick = { onItemSelected(index) },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = Color.White,
-                    selectedTextColor = Color.White,
-                    indicatorColor = selectedOrangeColor,
-                    unselectedIconColor = Color.White.copy(alpha = 0.7f),
-                    unselectedTextColor = Color.White.copy(alpha = 0.7f)
+                    selectedTextColor = Color(0xFF2E2E2E),
+                    indicatorColor = Color(0xFF696969),   // fundo cinza claro quando selecionado
+                    unselectedIconColor = Color(0xFF2E2E2E),
+                    unselectedTextColor = Color(0xFF2E2E2E)
                 )
             )
         }
