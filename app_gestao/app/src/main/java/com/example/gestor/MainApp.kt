@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.zIndex
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +38,6 @@ fun MainApp() {
         Icons.Filled.MoreVert
     )
 
-    // Animação da rotação do botão "+"
     val rotationAngle by animateFloatAsState(
         targetValue = if (isMenuExpanded) 45f else 0f,
         animationSpec = tween(durationMillis = 300)
@@ -54,15 +54,16 @@ fun MainApp() {
             if (selectedItem == 2) {
                 Box(
                     contentAlignment = Alignment.BottomEnd,
-                    modifier = Modifier
-                        .fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    // Área invisível que detecta clique fora dos botões
+                    // Fundo clicável para fechar o menu
                     if (isMenuExpanded) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clickable(onClick = { isMenuExpanded = false })
+                                .background(Color.Black.copy(alpha = 0.001f)) // quase invisível
+                                .zIndex(0f)
                         )
                     }
 
@@ -76,14 +77,15 @@ fun MainApp() {
                         exit = slideOutVertically(
                             targetOffsetY = { 200 },
                             animationSpec = tween(durationMillis = 300)
-                        ) + fadeOut(animationSpec = tween(300))
-                    ) {
+                        ) + fadeOut(animationSpec = tween(300)),
+                        modifier = Modifier
+                            .padding(bottom = 75.dp, end = 3.dp) // <- Ajustado aqui!
+                            .zIndex(1f)
+                    )
+                    {
                         Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                            horizontalAlignment = Alignment.End,
-                            modifier = Modifier
-                                .offset(y = (-70).dp)
-                                .offset(x = (-3).dp)
+                            verticalArrangement = Arrangement.spacedBy(0.dp),
+                            horizontalAlignment = Alignment.End
                         ) {
                             val buttonColor = Color(0xFFF5F5F5)
                             val iconDefaultColor = Color(0xFF2E2E2E)
@@ -132,9 +134,13 @@ fun MainApp() {
                         modifier = Modifier
                             .padding(end = 10.dp, bottom = 10.dp)
                             .size(55.dp)
-                            .rotate(rotationAngle)
+                            .zIndex(2f) // acima de tudo
                     ) {
-                        Text(text = "+", fontSize = 30.sp, color = Color.White)
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Menu",
+                            modifier = Modifier.rotate(rotationAngle)
+                        )
                     }
                 }
             }
